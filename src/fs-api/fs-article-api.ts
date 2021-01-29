@@ -58,5 +58,3 @@ export const fsArticleApi: LibArticleApi = {
 }
 
 export default fsArticleApi
-
-// TO DO IMPLEMENT CACHING

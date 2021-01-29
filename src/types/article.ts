@@ -8,7 +8,7 @@ export interface ArticleYaml {
   excerpt: string
   secret?: boolean
   subscription?: boolean
-  canonical_url?: string
+  canonicalUrl?: string
   timeToRead?: number
   content: string
 }

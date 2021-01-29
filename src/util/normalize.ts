@@ -39,7 +39,7 @@ export function normalizeArticle({
     date: formatDate(rawArticle.date, 'yyyy-MM-dd'),
     secret: !!rawArticle.secret,
     title: rawArticle.title,
-    canonical_url: rawArticle.slug,
+    canonicalUrl: rawArticle.slug,
     subscription: !!rawArticle.subscription
   }
 

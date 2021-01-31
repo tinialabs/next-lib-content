@@ -3,18 +3,18 @@ import { join, resolve } from 'path'
 import matter from 'gray-matter'
 import type { GrayMatterFile } from 'gray-matter'
 import slugify from 'slugify'
-import type { LibArticleApi, ArticleYaml } from '../types'
+import type { LibArticleApi, IArticleYaml } from '../types'
 
 const postsDirectory = resolve(process.cwd(), './content/posts')
 
 function _getRawArticleById(
   id: string
-): GrayMatterFile<string> & { data: ArticleYaml } {
+): GrayMatterFile<string> & { data: IArticleYaml } {
   const fullPathInFolder = join(postsDirectory, `${id}/index.mdx`)
   const fileContents = fs.readFileSync(fullPathInFolder, 'utf8')
 
   return matter(fileContents) as GrayMatterFile<string> & {
-    data: ArticleYaml
+    data: IArticleYaml
   }
 }
 
@@ -22,7 +22,7 @@ function getAllIds(): Array<string> {
   return fs.readdirSync(postsDirectory)
 }
 
-function getArticle(id: string): ArticleYaml {
+function getArticle(id: string): IArticleYaml {
   const foldername = id.replace(/\.mdx$/, '')
   const { data, content } = _getRawArticleById(foldername)
 
@@ -35,7 +35,7 @@ function getArticle(id: string): ArticleYaml {
   return result
 }
 
-function getAllArticles(): Array<ArticleYaml> {
+function getAllArticles(): Array<IArticleYaml> {
   return (
     getAllIds()
       .map((slug) => getArticle(slug))
@@ -44,7 +44,7 @@ function getAllArticles(): Array<ArticleYaml> {
   )
 }
 
-function getArticlesByAuthor(name: string): Array<ArticleYaml> {
+function getArticlesByAuthor(name: string): Array<IArticleYaml> {
   return getAllArticles().filter((post) => {
     return post.author.indexOf(name) !== -1
   })

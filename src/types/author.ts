@@ -1,11 +1,20 @@
-export interface AuthorYaml {
+import { INovelaImage } from './image'
+
+interface AuthorBase {
   slug: string
   name: string
   bio: string
-  avatar: string // ./avatars/dennis-brotzky.jpg
   social: Array<{ url: string; name: string }>
   featured: boolean
   authorsPage?: boolean
+}
+
+export interface AuthorYaml extends AuthorBase {
+  avatar: string // ./avatars/dennis-brotzky.jpg
+}
+
+export interface IAuthor extends AuthorBase {
+  avatar: INovelaImage
 }
 
 export interface LibAuthorApi {

@@ -1,4 +1,4 @@
-import type { ArticleYaml, AuthorYaml } from '../types'
+import type { IArticleYaml, AuthorYaml } from '../types'
 
 export {
   normalizeAuthor,
@@ -8,7 +8,7 @@ export {
 
 export { putCache, getCache } from './cache'
 
-export const byDate = (a: ArticleYaml, b: ArticleYaml) => +b.date - +a.date
+export const byDate = (a: IArticleYaml, b: IArticleYaml) => +b.date - +a.date
 
 export const getUniqueListBy = (
   array: Array<AuthorYaml>,

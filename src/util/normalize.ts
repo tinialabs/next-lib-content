@@ -1,20 +1,22 @@
-import {
+import readingTime from 'reading-time'
+import formatDate from 'date-fns/format'
+import type {
+  IArticleYaml,
+  AuthorYaml,
+  SitePropsYaml,
   IAuthor,
   IArticle,
   SiteProps,
   IArticleDetail,
   INovelaImage
-} from 'next-theme-novela/types'
-import readingTime from 'reading-time'
-import formatDate from 'date-fns/format'
-import type { ArticleYaml, AuthorYaml, SitePropsYaml } from '../types'
+} from '../types'
 
 export function normalizeArticle({
   siteProps,
   rawArticle
 }: {
   siteProps: SiteProps
-  rawArticle: ArticleYaml
+  rawArticle: IArticleYaml
 }): IArticle {
   const hero = {
     src: rawArticle.hero,
@@ -52,7 +54,7 @@ export function normalizeArticleWithContent({
   authors
 }: {
   siteProps: SiteProps
-  rawArticle: ArticleYaml
+  rawArticle: IArticleYaml
   authors: IAuthor[]
 }): [IArticleDetail, string] {
   const article = normalizeArticle({ siteProps, rawArticle })

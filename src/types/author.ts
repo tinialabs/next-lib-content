@@ -1,6 +1,6 @@
 import { INovelaImage } from './image'
 
-interface AuthorBase {
+interface IAuthorBase {
   slug: string
   name: string
   bio: string
@@ -9,16 +9,16 @@ interface AuthorBase {
   authorsPage?: boolean
 }
 
-export interface AuthorYaml extends AuthorBase {
+export interface IAuthorYaml extends IAuthorBase {
   avatar: string // ./avatars/dennis-brotzky.jpg
 }
 
-export interface IAuthor extends AuthorBase {
+export interface IAuthor extends IAuthorBase {
   avatar: INovelaImage
 }
 
 export interface LibAuthorApi {
-  getAuthorByName: (authors: AuthorYaml[], name: string) => AuthorYaml
-  getAuthorBySlug: (authors: AuthorYaml[], slug: string) => AuthorYaml
-  getAllAuthors: () => Array<AuthorYaml>
+  getAuthorByName: (authors: IAuthorYaml[], name: string) => IAuthorYaml
+  getAuthorBySlug: (authors: IAuthorYaml[], slug: string) => IAuthorYaml
+  getAllAuthors: () => Array<IAuthorYaml>
 }

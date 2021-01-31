@@ -2,18 +2,18 @@ import fs from 'fs'
 import { join, resolve } from 'path'
 import * as yaml from 'js-yaml'
 import slugify from 'slugify'
-import type { LibAuthorApi, AuthorYaml } from '../types'
+import type { LibAuthorApi, IAuthorYaml } from '../types'
 
 const authorsDirectory = resolve(process.cwd(), './content/authors')
 
-function _getRawAuthorsByFile(filename: string): AuthorYaml[] {
+function _getRawAuthorsByFile(filename: string): IAuthorYaml[] {
   const fullPath = join(authorsDirectory, `${filename}`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
-  const data: AuthorYaml[] = yaml.safeLoad(fileContents) as AuthorYaml[]
+  const data: IAuthorYaml[] = yaml.safeLoad(fileContents) as IAuthorYaml[]
   return data
 }
 
-function _extractFields(data: AuthorYaml): AuthorYaml {
+function _extractFields(data: IAuthorYaml): IAuthorYaml {
   const result = { ...data }
   result.slug = data.slug || slugify(data.name, { lower: true })
   result.avatar = join('authors', data.avatar)
@@ -21,7 +21,7 @@ function _extractFields(data: AuthorYaml): AuthorYaml {
   return result
 }
 
-function getAllAuthors(): Array<AuthorYaml> {
+function getAllAuthors(): Array<IAuthorYaml> {
   const authorFiles = fs
     .readdirSync(authorsDirectory)
     .filter((f) => f.endsWith('.yml'))
@@ -35,11 +35,11 @@ function getAllAuthors(): Array<AuthorYaml> {
     .map((author) => _extractFields(author))
 }
 
-function getAuthorByName(authors: AuthorYaml[], name: string): AuthorYaml {
+function getAuthorByName(authors: IAuthorYaml[], name: string): IAuthorYaml {
   return authors.find((author) => author.name === name)
 }
 
-function getAuthorBySlug(authors: AuthorYaml[], slug: string): AuthorYaml {
+function getAuthorBySlug(authors: IAuthorYaml[], slug: string): IAuthorYaml {
   return authors.find((author) => author.slug === slug)
 }
 

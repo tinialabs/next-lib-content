@@ -2,7 +2,7 @@ import readingTime from 'reading-time'
 import formatDate from 'date-fns/format'
 import type {
   IArticleYaml,
-  AuthorYaml,
+  IAuthorYaml,
   SitePropsYaml,
   IAuthor,
   IArticle,
@@ -75,7 +75,7 @@ export function normalizeAuthor({
   rawAuthor
 }: {
   siteProps: SiteProps
-  rawAuthor: AuthorYaml
+  rawAuthor: IAuthorYaml
 }): IAuthor {
   const avatar = {
     src: rawAuthor.avatar,
